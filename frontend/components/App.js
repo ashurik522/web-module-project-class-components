@@ -16,7 +16,8 @@ export default class App extends React.Component {
     super();
     this.state = {
       toDos: toDos, 
-      text: ""
+      text: "",
+      hideCompleted: false
     }
   }
 
@@ -34,6 +35,7 @@ export default class App extends React.Component {
 
   toggleItem = (itemId) => {
     this.setState({
+      ...this.state,
       toDos: this.state.toDos.map(item => {
         if(itemId === item.id){
           return {...item, completed: !item.completed}
@@ -42,6 +44,16 @@ export default class App extends React.Component {
       })
     })
   }
+
+  toggleHideCompleted = () => {
+    this.setState({
+      ...this.state,
+      hideCompleted: !this.state.hideCompleted,
+      status: !this.state.status
+    })
+  }
+
+
 
   render() {
     const { status } = this.state
@@ -54,10 +66,11 @@ export default class App extends React.Component {
         <TodoList 
           toDos={this.state.toDos}
           toggleItem={this.toggleItem}
+          hideCompleted={this.state.hideCompleted}
         />
         <Form addItem={this.addItem}/>
         <button 
-          onClick={() => this.setState({ status: !status })}>
+          onClick={this.toggleHideCompleted}>
           {`${status ? 'Show Completed' : 'Hide Completed'}`}
         </button>
       </div>
