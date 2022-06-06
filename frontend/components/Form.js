@@ -3,9 +3,13 @@ import React from 'react'
 export default class Form extends React.Component {
   render() {
     return (
-      <div>
-        Form
-      </div>
+      <form>
+        <input 
+          type="text"
+          name="item"
+        />
+        <button>Add</button>
+      </form>
     )
   }
 }
